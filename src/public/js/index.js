@@ -5,10 +5,10 @@ $(document).ready(function () {
             url: "/increment",
             type: "POST",
             success: function (res) {
-                console.log(res);
+                $('#code').text(res.receipt);
             },
             error: function (err) {
-                console.log(err);
+                $('#code').text(err);
             }
         });
     });
@@ -18,10 +18,10 @@ $(document).ready(function () {
             url: "/decrement",
             type: "POST",
             success: function (res) {
-                console.log(res);
+                $('#code').text(res.receipt);
             },
             error: function (err) {
-                console.log(err);
+                $('#code').text(err);
             }
         });
     });
@@ -31,10 +31,10 @@ $(document).ready(function () {
             url: "/getCount",
             type: "POST",
             success: function (res) {
-                $('.container p').text(res.count)
+                $('.container p').text(res.count);
             },
             error: function (err) {
-                console.log(err);
+                $('#code').text(err);
             }
         });
     });

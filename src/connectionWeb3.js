@@ -7,7 +7,7 @@ const contractJSON = require('./SmartContract/build/contracts/Counter.json');
 const CONTRACT_ADDRESS = addressJSON.address;
 const CONTRACT_ABI = contractJSON.abi;
 
-let web3, contract, getCountABI, incrementABI, decrementABI;
+let web3, contract, incrementABI, decrementABI;
 const accountAddress = process.env.ACCOUNT_ADDRESS
 const privateKey = Buffer.from(process.env.PRIVATE_KEY, 'hex');
 
@@ -15,7 +15,6 @@ const privateKey = Buffer.from(process.env.PRIVATE_KEY, 'hex');
     web3 = new Web3(process.env.RPC_URI);
     contract = await new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
-    getCountABI = contract.methods.getCount().encodeABI();
     incrementABI = contract.methods.increment().encodeABI();
     decrementABI = contract.methods.decrement().encodeABI();
 
@@ -44,20 +43,15 @@ async function makeTransaction(_data) {
 const connectionWeb3 = {
 
     async increment() {
-        const _receipt = await makeTransaction(incrementABI);
-        console.log("Receipt: ", _receipt.transactionHash);
-        console.log(await web3.eth.getTransactionReceipt(_receipt.transactionHash))
+        return makeTransaction(incrementABI);
     },
 
     async decrement() {
-        const _receipt = await makeTransaction(decrementABI);
-        console.log("Receipt: ", _receipt);
+        return makeTransaction(decrementABI);
     },
 
     async getCount() {
-        const _result = await contract.methods.getCount().call();
-        console.log("Receipt: ", _result);
-        return _result;
+        return contract.methods.getCount().call();
     }
 }
 
