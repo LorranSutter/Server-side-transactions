@@ -5,7 +5,11 @@ $(document).ready(function () {
             url: "/increment",
             type: "POST",
             success: function (res) {
-                $('#code').text(res.receipt);
+                if (res.status === 200) {
+                    $('#code').text(res.receipt);
+                } else {
+                    $('#code').text("Ooops... Something went wrong.");
+                }
             },
             error: function (err) {
                 $('#code').text(err);
@@ -18,7 +22,11 @@ $(document).ready(function () {
             url: "/decrement",
             type: "POST",
             success: function (res) {
-                $('#code').text(res.receipt);
+                if (res.status === 200) {
+                    $('#code').text(res.receipt);
+                } else {
+                    $('#code').text("Ooops... Something went wrong.");
+                }
             },
             error: function (err) {
                 $('#code').text(err);
@@ -31,7 +39,12 @@ $(document).ready(function () {
             url: "/getCount",
             type: "POST",
             success: function (res) {
-                $('.container p').text(res.count);
+                if (res.status === 200) {
+                    $('#code').text(res.receipt);
+                    $('.container p').text(res.count);
+                } else {
+                    $('#code').text("Ooops... Something went wrong.");
+                }
             },
             error: function (err) {
                 $('#code').text(err);

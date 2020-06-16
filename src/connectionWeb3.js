@@ -7,7 +7,7 @@ const contractJSON = require('./SmartContract/build/contracts/Counter.json');
 const CONTRACT_ADDRESS = addressJSON.address;
 const CONTRACT_ABI = contractJSON.abi;
 
-let web3, contract, incrementABI, decrementABI;
+let web3, contract, incrementABI, decrementABI, getCountABI;
 const accountAddress = process.env.ACCOUNT_ADDRESS
 const privateKey = Buffer.from(process.env.PRIVATE_KEY, 'hex');
 
@@ -17,6 +17,7 @@ const privateKey = Buffer.from(process.env.PRIVATE_KEY, 'hex');
 
     incrementABI = contract.methods.increment().encodeABI();
     decrementABI = contract.methods.decrement().encodeABI();
+    getCountABI = contract.methods.getCount().encodeABI();
 
 })();
 
@@ -51,7 +52,10 @@ const connectionWeb3 = {
     },
 
     async getCount() {
-        return contract.methods.getCount().call();
+        return Promise.all([
+            makeTransaction(getCountABI),
+            contract.methods.getCount().call()
+        ]);
     }
 }
 
