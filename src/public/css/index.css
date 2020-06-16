@@ -94,10 +94,10 @@ button {
 	border-radius: 20px;
 	background-color: #1f91dd;
 	color: white;
+	transition: transform 0.2s, background-color 0.3s;
 }
 
 button:hover {
 	background-color: #609fc9;
 	transform: scale(1.05);
-	transition: 0.2s;
 }
