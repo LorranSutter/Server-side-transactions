@@ -67,6 +67,9 @@ cd ..
 
 # Run the project
 npm run start
+
+# Or to use nodemon
+npm run dev
 ```
 
 ## :book: References and technologies :computer:
